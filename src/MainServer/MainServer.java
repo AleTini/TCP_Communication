@@ -14,20 +14,22 @@ public class MainServer {
 
             // Connessione con il client
             Socket clientSocket = server.accept();
-            System.out.println("SERVER: connesso al client");
+            System.out.println("SERVER: client connesso");
 
-            // Lettura richiesta del client
             BufferedReader reader = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
-            String richiesta = reader.readLine();
-            System.out.println("SERVER: ricevuto dal client: " + richiesta);
-
-            // Invio risposta al client
             PrintWriter writer = new PrintWriter(clientSocket.getOutputStream(), true);
-            writer.println("SERVER: messaggio ricevuto!");
 
-            // Chiusura comunicazione
+            // Prima ricezione e risposta
+            String messaggio1 = reader.readLine();
+            System.out.println("SERVER: ricevuto dal client: " + messaggio1);
+            writer.println("Ciao anche a te!");
+
+            // Seconda ricezione e risposta
+            String messaggio2 = reader.readLine();
+            System.out.println("SERVER: ricevuto dal client: " + messaggio2);
+            writer.println("Bene!");
+
             clientSocket.close();
-            // Chiusura server
             server.close();
 
         } catch (IOException e) {

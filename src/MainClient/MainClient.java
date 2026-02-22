@@ -11,15 +11,23 @@ public class MainClient {
             Socket socket = new Socket("localhost", 3000);
 
             // Invio richiesta
-            PrintWriter writer = new PrintWriter(socket.getOutputStream(), true);
-            writer.println("CLIENT: ciao!");
-
-            // Lettura risposta
+            PrintWriter writer = new PrintWriter(socket.getOutputStream(), false);
             BufferedReader reader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+
+            // Primo messaggio
+            writer.println("Ciao!");
+            writer.flush();
+
             String risposta = reader.readLine();
             System.out.println("CLIENT: ricevuto dal server: " + risposta);
 
-            // Chiusura comunicazione
+            // Secondo messaggio
+            writer.println("Come stai?");
+            writer.flush();
+
+            String risposta2 = reader.readLine();
+            System.out.println("CLIENT: ricevuto dal server: " + risposta2);
+
             socket.close();
 
         } catch (IOException e) {
