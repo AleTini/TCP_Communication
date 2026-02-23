@@ -2,6 +2,7 @@ package MainClient;
 
 import java.io.*;
 import java.net.Socket;
+import java.util.Scanner;
 
 public class MainClient {
     public static void main(String[] args) {
@@ -21,13 +22,22 @@ public class MainClient {
             String risposta = reader.readLine();
             System.out.println("CLIENT: ricevuto dal server: " + risposta);
 
-            // Secondo messaggio
-            writer.println("Come stai?");
-            writer.flush();
+            String mess = "";
 
-            String risposta2 = reader.readLine();
-            System.out.println("CLIENT: ricevuto dal server: " + risposta2);
+            while (!mess.equals("esci")) {
+                // invio messaggio e attesa risposta
 
+                Scanner sc = new Scanner(System.in);
+                System.out.println("Scrivi messaggio: ");
+                mess = sc.nextLine();
+
+
+                writer.println(mess);
+                writer.flush();
+
+                String risposta2 = reader.readLine();
+                System.out.println("CLIENT: ricevuto dal server: " + risposta2);
+            }
             socket.close();
 
         } catch (IOException e) {

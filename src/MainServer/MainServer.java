@@ -3,6 +3,7 @@ package MainServer;
 import java.io.*;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.util.Scanner;
 
 public class MainServer {
     public static void main(String[] args) {
@@ -24,12 +25,22 @@ public class MainServer {
             System.out.println("SERVER: ricevuto dal client: " + messaggio1);
             writer.println("Ciao anche a te!");
 
-            // Seconda ricezione e risposta
-            String messaggio2 = reader.readLine();
-            System.out.println("SERVER: ricevuto dal client: " + messaggio2);
-            writer.println("Bene!");
+            String mess = "";
 
-            clientSocket.close();
+            while (!mess.equals("esci")) {
+                // invio messaggio e attesa risposta
+
+                Scanner sc = new Scanner(System.in);
+                System.out.println("Scrivi messaggio: ");
+                mess = sc.nextLine();
+
+
+                writer.println(mess);
+                writer.flush();
+
+                String risposta2 = reader.readLine();
+                System.out.println("CLIENT: ricevuto dal server: " + risposta2);
+            }
             server.close();
 
         } catch (IOException e) {
