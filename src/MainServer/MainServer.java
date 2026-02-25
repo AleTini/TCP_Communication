@@ -31,7 +31,7 @@ public class MainServer {
                 // invio messaggio e attesa risposta
 
                 Scanner sc = new Scanner(System.in);
-                System.out.println("Scrivi messaggio: ");
+                System.out.print("Scrivi messaggio: ");
                 mess = sc.nextLine();
 
 
@@ -39,9 +39,10 @@ public class MainServer {
                 writer.flush();
 
                 String risposta2 = reader.readLine();
-                System.out.println("CLIENT: ricevuto dal server: " + risposta2);
+                System.out.println("SERVER: ricevuto dal client: " + risposta2);
             }
             server.close();
+            clientSocket.close();
 
         } catch (IOException e) {
             System.err.println("Porta non disponibile, errore nella creazione del socket");

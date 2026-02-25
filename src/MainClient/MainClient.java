@@ -20,7 +20,7 @@ public class MainClient {
             writer.flush();
 
             String risposta = reader.readLine();
-            System.out.println("CLIENT: ricevuto dal server: " + risposta);
+            System.out.print("CLIENT: ricevuto dal server: " + risposta);
 
             String mess = "";
 
