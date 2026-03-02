@@ -1,11 +1,9 @@
 package MainServer;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.PrintWriter;
+import java.io.*;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.util.Scanner;
 
 public class Server {
     ServerSocket serverSocket;
@@ -17,25 +15,23 @@ public class Server {
         this.serverSocket = new ServerSocket(porta);
     }
 
-    public Socket attendi() throws IOException {
+    public void attendi() throws IOException {
         this.clientSocket = serverSocket.accept();
-        return clientSocket;
     }
-    public void scrivi() throws IOException {
+
+    public void scrivi(String mess) throws IOException {
         PrintWriter writer = new PrintWriter(clientSocket.getOutputStream(), true);
-        writer.println("Ciao!");
-        writer.flush();
+        writer.println(mess);
     }
-    public void leggi() throws IOException{
+
+    public void leggi() throws IOException {
         BufferedReader reader = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
         String risposta = reader.readLine();
-        System.out.println("CLIENT: ricevuto dal server: " + risposta);
+        System.out.println("SERVER: ricevuto dal client: " + risposta);
     }
+
     public void chiudi() throws IOException {
         clientSocket.close();
-        serverSocket.close();
-    }
-    public void termina() throws  IOException{
         serverSocket.close();
     }
 }

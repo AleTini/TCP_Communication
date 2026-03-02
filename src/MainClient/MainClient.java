@@ -1,18 +1,29 @@
 package MainClient;
 
 import java.io.*;
-import java.net.Socket;
 import java.util.Scanner;
 
 public class MainClient {
     public static void main(String[] args) {
         System.out.println("CLIENT: avvio del client!");
+        String mess = "";
+        Scanner sc = new Scanner(System.in);
+
         try {
-            Client client = new Client("localhost");
-            client.connetti("localhost", 3000);
-            client.scrivi();
-            client.leggi();
+            Client client = new Client("Client1");
+            client.connetti("localhost", 3000); // connessione
+
+            while (!mess.equals("esci")) {
+                System.out.print("Scrivi messaggio: ");
+                mess = sc.nextLine();
+
+                client.scrivi(mess);        // passa la stringa al metodo
+                client.leggi();
+
+            }
+
             client.chiudi();
+
         } catch (IOException e) {
             System.out.println("Errore nella connessione con il server");
         }
