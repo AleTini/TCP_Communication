@@ -9,23 +9,19 @@ public class MainClient {
         String mess = "";
         Scanner sc = new Scanner(System.in);
 
-        try {
-            Client client = new Client("Client1");
-            client.connetti("localhost", 3000); // connessione
+        Client client = new Client("Client1");
+        client.connetti("localhost", 3000); // connessione
 
-            while (!mess.equals("esci")) {
-                System.out.print("Scrivi messaggio: ");
-                mess = sc.nextLine();
+        while (!mess.equals("esci")) {
+            System.out.print("Scrivi messaggio: ");
+            mess = sc.nextLine();
 
-                client.scrivi(mess);        // passa la stringa al metodo
-                client.leggi();
+            client.scrivi(mess);        // passa la stringa al metodo
+            client.leggi();
 
-            }
-
-            client.chiudi();
-
-        } catch (IOException e) {
-            System.out.println("Errore nella connessione con il server");
         }
+
+        client.chiudi();
+
     }
 }
